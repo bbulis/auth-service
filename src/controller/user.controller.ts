@@ -1,15 +1,14 @@
-import { Controller, Post } from "@nestjs/common";
+import { Body, Controller, Post, Res } from '@nestjs/common';
+import { RegisterUserDto } from './models/user/registerUser.model';
+import { Response } from 'express';
 
 @Controller()
 export class UserController {
-
   @Post('login')
-  login(): void {
-
-  }
+  login() {}
 
   @Post('register')
-  register(): void {
-
+  register(@Body() user: RegisterUserDto) {
+    console.log(user);
   }
 }

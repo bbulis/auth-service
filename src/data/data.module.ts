@@ -1,7 +1,8 @@
-import { Module } from "@nestjs/common";
-import { UserEntity } from "./entity/user.entity";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { ConfigModule, ConfigService } from "@nestjs/config";
+import { Module } from '@nestjs/common';
+import { UserEntity } from './entity/user.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ApplicationEntity } from './entity/application.entity';
 
 @Module({
   imports: [
@@ -16,10 +17,10 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
         database: configService.get('DB_DATABASE'),
         logging: configService.get('DB_LOGGING'),
         synchronize: configService.get('DB_SYNC'),
-        entities: [UserEntity]
+        entities: [UserEntity, ApplicationEntity],
       }),
-      inject: [ConfigService]
-    })
-  ]
+      inject: [ConfigService],
+    }),
+  ],
 })
-export class DataModule { }
+export class DataModule {}

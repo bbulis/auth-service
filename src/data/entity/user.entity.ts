@@ -1,27 +1,40 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
+import { ApplicationEntity } from './application.entity';
 
 @Entity('user')
 export class UserEntity {
-
   @PrimaryGeneratedColumn('uuid')
-  id: string
+  id: string;
 
   @Column()
-  firstname: string
+  firstname: string;
 
   @Column()
-  lastname: string
+  lastname: string;
 
   @Column({ unique: true })
-  email: string
+  email: string;
 
   @Column()
-  password: string
+  password: string;
 
   @Column()
-  isApproved: boolean
+  isApproved: boolean;
 
-  @Column({type: 'enum', enum: ['male', 'female', 'unspecified']})
-  gender: string
+  @Column({ type: 'enum', enum: ['ADMIN', 'USER'] })
+  accountType: string;
 
+  @Column({ type: 'enum', enum: ['male', 'female'] })
+  gender: string;
+
+  @ManyToMany(() => ApplicationEntity)
+  @JoinTable()
+  applications: ApplicationEntity[];
 }
