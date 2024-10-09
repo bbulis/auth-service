@@ -12,3 +12,9 @@ Content-Type: application/json
 
 ### send login request
 POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "benjamin.bulis@outlook.at",
+  "password": "IchBinEinCoolesNeuesPasswort"
+}
