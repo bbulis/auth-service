@@ -5,6 +5,10 @@ import { UserService } from './service/user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from './data/entity/user.entity';
 import { ApplicationEntity } from './data/entity/application.entity';
+import { ApplicationAccessEntity } from './data/entity/application-access.entity';
+import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
+import { PasswordService } from './service/password.service';
+import { UserDtoUserDbMapper } from './mapper/userDtoUserDbMapper';
 
 @Module({
   imports: [
@@ -23,10 +27,14 @@ import { ApplicationEntity } from './data/entity/application.entity';
         autoLoadEntities: true,
       }),
       inject: [ConfigService],
-    }),
-    TypeOrmModule.forFeature([UserEntity, ApplicationEntity]),
+    } as TypeOrmModuleAsyncOptions),
+    TypeOrmModule.forFeature([
+      UserEntity,
+      ApplicationEntity,
+      ApplicationAccessEntity,
+    ]),
   ],
   controllers: [UserController],
-  providers: [UserService],
+  providers: [UserService, PasswordService, UserDtoUserDbMapper],
 })
 export class AppModule {}

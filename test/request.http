@@ -1,3 +1,4 @@
+### send register request
 POST http://localhost:8080/register
 Content-Type: application/json
 
@@ -8,3 +9,6 @@ Content-Type: application/json
     "email": "benjamin.bulis@outlook.at",
     "password": "Test1234"
 }
+
+### send login request
+POST http://localhost:8080/login

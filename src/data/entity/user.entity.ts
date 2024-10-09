@@ -1,12 +1,5 @@
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-  Unique,
-} from 'typeorm';
-import { ApplicationEntity } from './application.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ApplicationAccessEntity } from './application-access.entity';
 
 @Entity('user')
 export class UserEntity {
@@ -25,7 +18,7 @@ export class UserEntity {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ default: false })
   isApproved: boolean;
 
   @Column({ type: 'enum', enum: ['ADMIN', 'USER'] })
@@ -34,7 +27,9 @@ export class UserEntity {
   @Column({ type: 'enum', enum: ['male', 'female'] })
   gender: string;
 
-  @ManyToMany(() => ApplicationEntity)
-  @JoinTable()
-  applications: ApplicationEntity[];
+  @OneToMany(
+    () => ApplicationAccessEntity,
+    (applicationAccessEntity) => applicationAccessEntity.user
+  )
+  applicationAccess: ApplicationAccessEntity[];
 }

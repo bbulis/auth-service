@@ -1,5 +1,5 @@
-import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { ApplicationAccessEntity } from './application-access.entity';
 
 @Entity('application')
 export class ApplicationEntity {
@@ -8,4 +8,10 @@ export class ApplicationEntity {
 
   @Column()
   name: string;
+
+  @OneToMany(
+    () => ApplicationAccessEntity,
+    (applicationAccessEntity) => applicationAccessEntity.user
+  )
+  applicationAccess: ApplicationAccessEntity[];
 }
