@@ -7,8 +7,8 @@ export class PasswordService {
   constructor() {}
   async hashPassword(password: string) {
     this.logger.log('Gen Salt');
-    const generatedSalt = await genSalt(15);
+    const generatedSalt = await genSalt(12);
     this.logger.log('hash password');
-    return await hash(password, generatedSalt);
+    return hash(password, generatedSalt);
   }
 }
